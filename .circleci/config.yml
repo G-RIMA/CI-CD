@@ -20,6 +20,15 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - run: echo world
+  
+  print_name:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: "echo environment that is in project"
+          command: |
+            echo $MY_MARIA_ENV
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
