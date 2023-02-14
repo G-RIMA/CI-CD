@@ -30,8 +30,7 @@ jobs:
           shell: return 1
           
       
-      - run:
-          echo 'Hello Error'
+      - run: echo Hello, Error
           when: on_fail
   
   
