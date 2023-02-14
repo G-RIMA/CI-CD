@@ -19,6 +19,21 @@ jobs:
     steps:
       - print_pipeline_id:
           id: << pipeline.id >>
+
+  failing_job:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: fail
+          command: fail job
+          shell: return 1
+          
+      
+      run:
+        echo 'Hello Error'
+        when: on_fail
+  
   
 
 # Invoke jobs via workflows
@@ -27,3 +42,7 @@ workflows:
   my_workflow:
     jobs:
         - my_job
+  
+  my_failure:
+    jobs:
+      - failing_job
