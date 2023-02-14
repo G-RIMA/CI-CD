@@ -3,58 +3,23 @@
 version: 2.1
 
 commands:
-  print_pieline_id:
+  print_pipeline_id:
     steps:
       - run: echo ${CIRCLE_WORKFLOW_ID}
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  print_hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: circleci/node:13.8.0
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - run: echo hello
-
-  print_world:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run: echo world
-  
-  print_name:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run:
-          name: "echo environment that is in project"
-          command: |
-            echo $MY_MARIA_ENV
-  
   my_job:
     docker:
-      image: circleci/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
-      -run:
-        print_pipeline_id
+      - print_pipeline_id
+  
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  # name workflow print-hello-workflow
-  print-hello-workflow:
-    jobs:
-      - print_hello
-      - print_world:
-          requires:
-            - print_hello
-      - print_name:
-          requires:
-            - print_world
   my_workflow:
     jobs:
-      - my_job
+        - my_job
