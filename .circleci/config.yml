@@ -2,6 +2,11 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+commands:
+  print_pieline_id:
+    steps:
+      - run: echo ${CIRCLE_WORKFLOW_ID}
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -29,6 +34,13 @@ jobs:
           name: "echo environment that is in project"
           command: |
             echo $MY_MARIA_ENV
+  
+  my_job:
+    docker:
+      image: circleci/node:13.8.0
+    steps:
+      -run:
+        print_pipeline_id
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -43,4 +55,6 @@ workflows:
       - print_name:
           requires:
             - print_world
-
+  my_workflow:
+    jobs:
+      - my_job
