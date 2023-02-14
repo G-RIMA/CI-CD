@@ -34,7 +34,7 @@ jobs:
 
       - run:
           name: Failures
-          command: curl --data fail_tests.log
+          command: failed
           when: on_fail
   
   
