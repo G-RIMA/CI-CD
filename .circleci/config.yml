@@ -30,9 +30,9 @@ jobs:
           shell: return 1
           
       
-      run:
-        echo 'Hello Error'
-        when: on_fail
+      - run:
+          echo 'Hello Error'
+          when: on_fail
   
   
 
